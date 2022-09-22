@@ -17,12 +17,14 @@ new_folder = "C:/Users/Kevin/Documents/ImageFlip/converted_images"
 
 
 for image in os.listdir(directory):
-    
+    # sort files found in directory 
+    sorted(image)
     print(image)
+
     img = Image.open(os.path.join(directory, image))
     
 
-    # Resize images 
+    # Resize images to 100x100 (does not preserve aspect ratio)
     resized_img = img.resize((100,100))
 
     # Convert to black and white
