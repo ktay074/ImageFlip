@@ -1,11 +1,13 @@
 
 from operator import invert
-import os, PIL
+import os
 from PIL import Image, ImageChops
 
-directory = "C:/Users/Kevin/Downloads/ImageFlip/images"
+# main directory of images
+directory = "C:/Users/Kevin/Documents/ImageFlip/images" 
 
-new_folder = "C:/Users/Kevin/ImageFlip/converted_images"
+# new folder where images will be stored
+new_folder = "C:/Users/Kevin/Documents/ImageFlip/converted_images"
 
 # check directory to create a folder if it does not exist
 # check_directory = os.path.isdir(directory)
@@ -15,8 +17,10 @@ new_folder = "C:/Users/Kevin/ImageFlip/converted_images"
 
 
 for image in os.listdir(directory):
-
+    
+    print(image)
     img = Image.open(os.path.join(directory, image))
+    
 
     # Resize images 
     resized_img = img.resize((100,100))
@@ -31,9 +35,20 @@ for image in os.listdir(directory):
     flipped_img = inverted_bw_img.transpose(Image.FLIP_TOP_BOTTOM)
 
     # Show images
-    flipped_img.show()
+    # flipped_img.show()
 
-    
+    # returns original name of file from directory
+    base_filename = os.path.basename(image)
+
+    # splits the base file name into two parts
+    name, ext = os.path.splitext(base_filename)
+
+    # final path with new file name concatenated 
+    final_path = os.path.join(new_folder, name + "_preprocessed" + ext)
+
+    # save processed images to new directory
+    flipped_img.save(final_path)
+
 
 
 
